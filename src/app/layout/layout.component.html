@@ -1,0 +1,51 @@
+<main class="w-full h-screen">
+    <mat-drawer-container class="w-full h-full" autosize>
+        <mat-drawer #drawer class=" bg-cyan-700 w-1/12 h-full" [opened]="true" mode="side">
+            <div class="px-1 py-1 flex w-full justify-start">
+                <button type="button" mat-button (click)="drawer.toggle()">
+                    <span class="material-symbols-outlined text-white">
+                        menu
+                    </span>
+                </button>
+            </div>
+            <ul class="flex flex-col">
+                <li *ngFor="let item of data" class="">
+                    <div>
+                        <a class="text-white px-6 w-full font-mono" *ngIf="!item?.expansion; else Expansion"
+                            [routerLink]="item.path">{{
+                            item?.label
+                            }}</a>
+                        <ng-template #Expansion>
+                            <mat-accordion>
+                                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title class="text-white py-2 font-mono">
+                                            {{ item?.label }}
+                                        </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div *ngFor="let option of item?.expansionItens" class=" py-2"><a
+                                            class="text-white font-mono" [routerLink]="option.path">{{
+                                            option?.label }}</a></div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </ng-template>
+                    </div>
+                </li>
+
+            </ul>
+        </mat-drawer>
+
+        <section class="flex h-full w-11/12">
+            <div *ngIf="!handleToggle()" class="px-1 py-1 absolute">
+                <button type="button" mat-button (click)="drawer.toggle()">
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+                </button>
+            </div>
+            <div class="w-full">
+                <router-outlet></router-outlet>
+            </div>
+        </section>
+    </mat-drawer-container>
+</main>
