@@ -8,7 +8,7 @@ export const data: layoutData[] = [
             {
                 label: 'Criação',
                 expansion: false,
-                path: 'criação'
+                path: 'standalone/criacao'
             },
             {
                 label: 'Roteirização',
