@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StorageService } from 'src/app/utilities/storage/storage.service';
+import { TesteService } from 'src/app/utilities/storage/teste.service';
 
 @Component({
   selector: 'app-criacao',
@@ -9,9 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CriacaoComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private storage: StorageService,
+    private testeService: TesteService
+  ) { }
 
   ngOnInit() {
+    console.log('storageService')
+    this.storage.createTopic('teste');
+    this.storage.createTopic('teste 2');
+    this.storage.updateTopic('teste', [1, 2, 3, 4])
+    this.storage.getTopic('teste').subscribe(
+      console.log
+    )
+
+    console.log('testeService')
+    this.testeService.createTopic('topico');
+
   }
 
 }
